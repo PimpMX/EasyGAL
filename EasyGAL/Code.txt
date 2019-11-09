@@ -1,0 +1,9 @@
+
+PIN0 = I1; $ This makes the program run faster
+PIN2 = I2;
+PIN3 = I3;
+
+
+PIN5 = I6;
+
+
