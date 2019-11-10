@@ -1,6 +1,5 @@
 #include "Symbol.h"
 #include "Parser.h"
-
 #include <iostream>
 
 int main()

@@ -69,7 +69,7 @@ void Parser::PreProcessing()
 		if (Buffer.size())
 			Processed.push_back(Buffer);
 	}
-
+	
 	Contents = Processed;
 }
 
