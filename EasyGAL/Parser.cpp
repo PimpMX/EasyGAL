@@ -52,28 +52,54 @@ void Parser::DumpContents()
 
 void Parser::PreProcessing()
 {
+	RemoveComments();
+
+	// Continue here
+}
+
+void Parser::ParseSymbols()
+{
+
+}
+
+void Parser::RemoveSpaces()
+{
 	vector<string> Processed;
 
 	for (string Line : Contents) 
 	{
-		string Buffer;
+		string ProcessedLine;
+
+		for (char Character : Line)
+			if (Character != ' ')
+				ProcessedLine.push_back(Character);
+
+		if (ProcessedLine.size())
+			Processed.push_back(ProcessedLine);
+	}
+
+	Contents = Processed;
+}
+
+void Parser::RemoveComments()
+{
+	vector<string> Processed;
+
+	for (string Line : Contents)
+	{
+		string ProcessedLine;
 
 		for (char Character : Line) 
 		{
 			if (Character == '$')
 				break;
 			else if (Character != ' ')
-				Buffer.push_back(Character);
+				ProcessedLine.push_back(Character);
 		}
 
-		if (Buffer.size())
-			Processed.push_back(Buffer);
+		if (ProcessedLine.size())
+			Processed.push_back(ProcessedLine);
 	}
-	
+
 	Contents = Processed;
-}
-
-void Parser::ParseSymbols()
-{
-
 }

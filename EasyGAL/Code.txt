@@ -1,9 +1,7 @@
 
-PIN0 = I1; $ This makes the program run faster
+PIN0 = I1;		$ This is a comment
 PIN2 = I2;
 PIN3 = I3;
-
-
-PIN5 = I6;
+PIN5 = I4;
 
 

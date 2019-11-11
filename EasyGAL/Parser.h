@@ -23,6 +23,9 @@ private:
 	void PreProcessing();
 	void ParseSymbols();
 
+	void RemoveSpaces();
+	void RemoveComments();
+
 private:
 
 	ifstream File; 
