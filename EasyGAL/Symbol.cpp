@@ -4,12 +4,12 @@ unordered_map<string, Symbol> g_Symbols;
 
 optional<Symbol> Symbol::Get(string Name) 
 {
-
+	return {};
 }
 
 bool Symbol::Exists(string Name) 
 {
-
+	return false;
 }
 
 void Symbol::Add(Symbol& NewSymbol) 

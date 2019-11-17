@@ -16,6 +16,11 @@
 		printf(FORMAT, __VA_ARGS__); \
 		printf("%s", "\n")
 
+	#define DLOG(FORMAT, ...) \
+		printf("%s", "[Debug] "); \
+		printf(FORMAT, __VA_ARGS__); \
+		printf("%s", "\n")
+
 	/*
 	*	Used to measure execution time at specific points.
 	*	Prints passed time in seconds.
@@ -37,13 +42,19 @@
 		printf(FORMAT, __VA_ARGS__); \
 		printf("%s", "\n")
 
+
+	// No debug messages allowed in release.
+
+	#define DLOG
+
 	/*
 	*	No benchmarks allowed in release build.
-	*	Empty defines that code with BENCH_START and BENCH_END will still compile in release
+	*	Empty defines that code with BENCH_START and BENCH_END will still compile in release.
 	*/
 
 	#define BENCH_START
 	#define BENCH_END
+
 
 #endif
 

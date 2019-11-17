@@ -4,16 +4,16 @@
 #include <optional>
 #include <unordered_map>
 
-#define SYMBOL_UNDEFINED "UNDEFINED"
-
 using namespace std;
+
+#define SYMBOL_UNDEFINED "UNDEFINED"
 
 class Symbol
 {
 
 public:
 
-	// Static functions
+	// Static functions that interface with "g_Symbols"
 
 	static optional<Symbol> Get(string Name);
 	static bool Exists(string Name);

@@ -13,11 +13,11 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Quelldateien\Classes">
-      <UniqueIdentifier>{81f378ff-5164-40fb-83a6-47fc1256c3a7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Headerdateien\Classes">
+    <Filter Include="Headerdateien\Objects">
       <UniqueIdentifier>{599038f7-acae-4eb1-8325-56eac86a9b14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Objects">
+      <UniqueIdentifier>{81f378ff-5164-40fb-83a6-47fc1256c3a7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -25,26 +25,44 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="Symbol.cpp">
-      <Filter>Quelldateien\Classes</Filter>
+      <Filter>Quelldateien\Objects</Filter>
     </ClCompile>
     <ClCompile Include="Expression.cpp">
-      <Filter>Quelldateien\Classes</Filter>
+      <Filter>Quelldateien\Objects</Filter>
     </ClCompile>
     <ClCompile Include="Parser.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Lexer.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Token.cpp">
+      <Filter>Quelldateien\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Helper.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Expression.h">
-      <Filter>Headerdateien\Classes</Filter>
+      <Filter>Headerdateien\Objects</Filter>
     </ClInclude>
     <ClInclude Include="Symbol.h">
-      <Filter>Headerdateien\Classes</Filter>
+      <Filter>Headerdateien\Objects</Filter>
     </ClInclude>
     <ClInclude Include="Parser.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Debug.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Lexer.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Token.h">
+      <Filter>Headerdateien\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Helper.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
