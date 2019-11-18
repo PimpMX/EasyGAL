@@ -47,10 +47,7 @@
 
 	#define DLOG
 
-	/*
-	*	No benchmarks allowed in release build.
-	*	Empty defines that code with BENCH_START and BENCH_END will still compile in release.
-	*/
+	// No benchmarks allowed in release build.
 
 	#define BENCH_START
 	#define BENCH_END

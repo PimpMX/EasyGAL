@@ -19,6 +19,9 @@
     <Filter Include="Quelldateien\Objects">
       <UniqueIdentifier>{81f378ff-5164-40fb-83a6-47fc1256c3a7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Ressourcendateien\Source">
+      <UniqueIdentifier>{a94490aa-bda0-467a-adee-aade0a1987e7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -68,7 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Code.txt">
-      <Filter>Ressourcendateien</Filter>
+      <Filter>Ressourcendateien\Source</Filter>
     </Text>
   </ItemGroup>
 </Project>

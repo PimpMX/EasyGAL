@@ -7,8 +7,7 @@
 #include <iostream>
 #include <string>
 
-
 int main()
 {
-	g_Lexer.Analyze("Coder.txt");
+	g_Lexer.Analyze("Code.txt");
 }

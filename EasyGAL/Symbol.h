@@ -17,7 +17,7 @@ public:
 
 	static optional<Symbol> Get(string Name);
 	static bool Exists(string Name);
-	static void Add(Symbol& NewSymbol);
+	static bool Add(Symbol NewSymbol);
 
 public:
 

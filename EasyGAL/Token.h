@@ -11,13 +11,16 @@ class Token
 public:
 
 	Token(string Type, string Value);
+	Token(string Value);
+
+	Token();
 	~Token();
 
 	string GetType();
-	string GetValue();
+	void SetType(string Type);
 
-	bool ValidateType();
-	bool ValidateValue();
+	string GetValue();
+	void SetValue(string Value);
 
 	friend ostream& operator<<(ostream& Out, const Token& OutToken);
 	friend istream& operator>>(istream& In, Token& InToken);

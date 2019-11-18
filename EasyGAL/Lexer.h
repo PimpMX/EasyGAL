@@ -12,24 +12,31 @@ using namespace std;
 
 class Lexer
 {
-	
+
 public:
 
 	bool Analyze(string Path);
 
 private:
-
+	
 	bool LoadFile(string Path);
 
 	void PreProcessing();
-	void RemoveSpaces();
 	void RemoveComments();
+
+	bool GenerateTokens();
+	void GenerateFile(string Name);
 
 private:
 
-	ifstream m_InputFile;
-	ofstream m_OutputFile;
+	vector<string> m_Input;
 	vector<Token> m_Tokens;
+	ofstream m_OutputFile;
+	
+private:
+
+	const string DEFAULT_DELIMITERS = " \t\v\n\r\f";
+	const string TOKEN_DELIMITERS = "=&|^!()[]{};";
 };
 
 extern Lexer g_Lexer;

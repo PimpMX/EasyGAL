@@ -1,7 +1,1 @@
-
-PIN0 = I1;		$ This is a comment
-PIN2 = I2;
-PIN3 = I3;
-PIN5 = I4;
-
-
+PIN0 = I1 & I2;

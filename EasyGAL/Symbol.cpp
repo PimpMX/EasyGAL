@@ -4,17 +4,29 @@ unordered_map<string, Symbol> g_Symbols;
 
 optional<Symbol> Symbol::Get(string Name) 
 {
+	for (auto Pair : g_Symbols)
+		if (Pair.first == Name)
+			return Pair.second;
+
 	return {};
 }
 
 bool Symbol::Exists(string Name) 
 {
+	for (auto Pair : g_Symbols)
+		if (Pair.first == Name)
+			return true;
+	
 	return false;
 }
 
-void Symbol::Add(Symbol& NewSymbol) 
+bool Symbol::Add(Symbol NewSymbol) 
 {
+	if (Symbol::Exists(NewSymbol.GetName()))
+		return false;
 
+	g_Symbols[NewSymbol.GetName()] = NewSymbol;
+	return true;
 }
 
 Symbol::Symbol(std::string Name)

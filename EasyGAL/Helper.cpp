@@ -1,9 +1,13 @@
 #include "Helper.h"
 
+/*
+*		String::Tokenize splits strings into tokens based on specified delimiters.
+*/
+
 vector<string> Helper::String::Tokenize(const string& InputString, string Delimiters)
 {
 	/*
-	*	String::Tokenize() only returns back InputString in case: 
+	*	String::Tokenize() only returns one To in case: 
 	*
 	*		- String only contains delimiters
 	*		- String contains no delimiters
@@ -12,7 +16,7 @@ vector<string> Helper::String::Tokenize(const string& InputString, string Delimi
 
 	if (String::Find(InputString, Delimiters) == -1 || String::FindNot(InputString, Delimiters) == -1)
 		return vector<string>{InputString};
-	
+
 	vector<string> Tokens;
 
 	int iBegin = String::FindNot(InputString, Delimiters);
@@ -32,6 +36,51 @@ vector<string> Helper::String::Tokenize(const string& InputString, string Delimi
 
 		if (iBegin == -1)
 			break;
+
+		i = iBegin;
+	}
+
+	return Tokens;
+}
+
+/*
+*		String::TokenizeEx splits strings into tokens based on delimiters. This extended version of String::Tokenize 
+*		also returns the delimiters which are found in the string as tokens.
+*/
+
+vector<string> Helper::String::TokenizeEx(const string& InputString, string Delimiters)
+{
+	if (String::Find(InputString, Delimiters) == -1 || String::FindNot(InputString, Delimiters) == -1)
+		return vector<string>{InputString};
+
+	vector<string> Tokens;
+
+	int iBegin = String::FindNot(InputString, Delimiters);
+
+	for (unsigned int i = iBegin; i < InputString.size(); i++)
+	{
+		int iEnd = String::Find(InputString, Delimiters, i);
+
+		if (iEnd == -1)
+		{
+			Tokens.push_back(string(InputString.begin() + iBegin, InputString.end()));
+			break;
+		}
+
+		Tokens.push_back(string(InputString.begin() + iBegin, InputString.begin() + iEnd));
+		iBegin = String::FindNot(InputString, Delimiters, iEnd);
+
+		if (iBegin == -1)
+		{
+			// If no new non delimiter characters are found, the remaining characters are added as tokens.
+
+			for (int j = i + 1; j < InputString.size(); j++) 
+				Tokens.push_back(string(1, InputString[j]));
+			break;
+		}
+
+		for (int i = 0; i < iBegin - iEnd; i++)
+			Tokens.push_back(string(1, InputString[iEnd + i]));
 
 		i = iBegin;
 	}
