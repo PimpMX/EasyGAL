@@ -1,13 +1,15 @@
-#include "Symbol.h"
-#include "Parser.h"
-#include "Token.h"
-#include "Lexer.h"
 
-#include <fstream>
 #include <iostream>
 #include <string>
 
+#include "Debug.h"
+#include "Helper.h"
+#include "Lexer.h"
+#include "Expression.h"
+
+using namespace std;
+
 int main()
 {
-	g_Lexer.Analyze("Code.txt");
+
 }

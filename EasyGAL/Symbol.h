@@ -6,22 +6,18 @@
 
 using namespace std;
 
-#define SYMBOL_UNDEFINED "UNDEFINED"
-
 class Symbol
 {
 
 public:
 
-	// Static functions that interface with "g_Symbols"
+	// Static functions that interface with g_Symbols.
 
 	static optional<Symbol> Get(string Name);
 	static bool Exists(string Name);
 	static bool Add(Symbol NewSymbol);
 
 public:
-
-	// Member functions
 
 	Symbol();
 	~Symbol();
@@ -31,12 +27,11 @@ public:
 	Symbol(string Name, bool* pValue);
 
 	string GetName();
-	bool SetName(string Name);
-
 	bool GetValue();
-	void SetValue(bool Value);
-
 	bool* GetValueAdress();
+
+	bool SetName(string Name);
+	void SetValue(bool Value);
 	bool SetParent(bool* pValue);
 
 private:
@@ -46,5 +41,6 @@ private:
 	bool* m_pValue;
 };
 
-
 extern unordered_map<string, Symbol> g_Symbols;
+
+const string SYMBOL_UNDEFINED = "UNDEFINED";

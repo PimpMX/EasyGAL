@@ -1,6 +1,6 @@
 #include "Token.h"
 
-Token::Token(string Type, string Value) 
+Token::Token(string Type, string Value)
 {
 	m_KeyValuePair.first = Type;
 	m_KeyValuePair.second = Value;
@@ -27,14 +27,14 @@ string Token::GetType()
 	return m_KeyValuePair.first;
 }
 
-void Token::SetType(string Type)
-{
-	m_KeyValuePair.first = Type;
-}
-
 string Token::GetValue()
 {
 	return m_KeyValuePair.second;
+}
+
+void Token::SetType(string Type)
+{
+	m_KeyValuePair.first = Type;
 }
 
 void Token::SetValue(string Value)

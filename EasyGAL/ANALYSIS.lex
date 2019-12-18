@@ -1,0 +1,6 @@
+[IDENTIFIER: "PIN0"]
+[OPERATOR=: "="]
+[NUMBER: "1"]
+[OPERATOR&: "&"]
+[IDENTIFIER: "I2"]
+[COLON: ";"]

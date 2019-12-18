@@ -45,6 +45,9 @@
     <ClCompile Include="Helper.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Node.cpp">
+      <Filter>Quelldateien\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Expression.h">
@@ -67,6 +70,9 @@
     </ClInclude>
     <ClInclude Include="Helper.h">
       <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>Headerdateien\Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

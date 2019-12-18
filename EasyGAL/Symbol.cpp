@@ -29,6 +29,17 @@ bool Symbol::Add(Symbol NewSymbol)
 	return true;
 }
 
+Symbol::Symbol()
+{
+	m_SymbolName = SYMBOL_UNDEFINED;
+	m_Value = false;
+	m_pValue = nullptr;
+}
+
+Symbol::~Symbol() 
+{
+}
+
 Symbol::Symbol(std::string Name)
 {
 	m_SymbolName = Name;
@@ -50,42 +61,9 @@ Symbol::Symbol(string Name, bool* pValue)
 	m_pValue = pValue;
 }
 
-bool Symbol::SetParent(bool* pValue)
-{
-	if (pValue) 
-	{
-		m_pValue = pValue;
-		return true;
-	}
-
-	return false;
-}
-
-Symbol::Symbol()
-{
-	m_SymbolName = SYMBOL_UNDEFINED;
-	m_Value = false;
-	m_pValue = nullptr;
-}
-
-Symbol::~Symbol() 
-{
-}
-
 std::string Symbol::GetName()
 {
 	return m_SymbolName;
-}
-
-bool Symbol::SetName(std::string Name)
-{
-	if (Name != SYMBOL_UNDEFINED)
-	{
-		m_SymbolName = Name;
-		return true;
-	}
-
-	return false;
 }
 
 /*
@@ -110,6 +88,17 @@ bool* Symbol::GetValueAdress()
 	return &m_Value;
 }
 
+bool Symbol::SetName(std::string Name)
+{
+	if (Name != SYMBOL_UNDEFINED)
+	{
+		m_SymbolName = Name;
+		return true;
+	}
+
+	return false;
+}
+
 /*
 *	If the symbol has a parent it doesn't have its own value.
 *	This means it's value can't be set.
@@ -119,4 +108,15 @@ void Symbol::SetValue(bool Value)
 {
 	if(!m_pValue) 
 		m_Value = Value;
+}
+
+bool Symbol::SetParent(bool* pValue)
+{
+	if (pValue) 
+	{
+		m_pValue = pValue;
+		return true;
+	}
+
+	return false;
 }

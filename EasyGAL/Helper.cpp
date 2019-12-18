@@ -7,7 +7,7 @@
 vector<string> Helper::String::Tokenize(const string& InputString, string Delimiters)
 {
 	/*
-	*	String::Tokenize() only returns one To in case: 
+	*	String::Tokenize() only returns one Token in case: 
 	*
 	*		- String only contains delimiters
 	*		- String contains no delimiters
@@ -21,7 +21,7 @@ vector<string> Helper::String::Tokenize(const string& InputString, string Delimi
 
 	int iBegin = String::FindNot(InputString, Delimiters);
 
-	for (unsigned int i = iBegin; i < InputString.size(); i++) 
+	for (unsigned int i = iBegin; i < InputString.size() + 1; i++) 
 	{
 		int iEnd = String::Find(InputString, Delimiters, i);
 
@@ -34,7 +34,7 @@ vector<string> Helper::String::Tokenize(const string& InputString, string Delimi
 		Tokens.push_back(string(InputString.begin() + iBegin, InputString.begin() + iEnd));
 		iBegin = String::FindNot(InputString, Delimiters, iEnd);
 
-		if (iBegin == -1)
+		if (iBegin == -1) 
 			break;
 
 		i = iBegin;
@@ -57,7 +57,7 @@ vector<string> Helper::String::TokenizeEx(const string& InputString, string Deli
 
 	int iBegin = String::FindNot(InputString, Delimiters);
 
-	for (unsigned int i = iBegin; i < InputString.size(); i++)
+	for (unsigned int i = iBegin; i < InputString.size() + 1; i++)
 	{
 		int iEnd = String::Find(InputString, Delimiters, i);
 
@@ -74,7 +74,7 @@ vector<string> Helper::String::TokenizeEx(const string& InputString, string Deli
 		{
 			// If no new non delimiter characters are found, the remaining characters are added as tokens.
 
-			for (int j = i + 1; j < InputString.size(); j++) 
+			for (unsigned int j = i + 1; j < InputString.size(); j++) 
 				Tokens.push_back(string(1, InputString[j]));
 			break;
 		}
@@ -135,4 +135,16 @@ int Helper::String::FindNot(const string& String, const string& Characters, unsi
 	// Returns -1 if every character is a non allowed character
 
 	return -1;
+}
+
+bool Helper::String::IsNumber(const string& String)
+{
+	if (String.empty())
+		return false;
+
+	for (char Character : String) 
+		if (Character < '0' || Character > '9')
+			return false;
+	
+	return true;
 }

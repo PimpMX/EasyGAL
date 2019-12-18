@@ -2,8 +2,67 @@
 
 Lexer g_Lexer;
 
-bool Lexer::Analyze(string Path)
+bool Lexer::Analyze(vector<string> Input, vector<Token>* pTokensOut)
 {
+	/* Clear buffers from last analysis for new analysis */
+
+	m_Input.clear();
+	m_Tokens.clear();
+
+	if (!pTokensOut) 
+	{
+		ERROR("%s", "pTokensOut was nullptr");
+		return false;
+	}
+
+	m_Input = Input;
+
+	PreProcessing();
+
+	if (GenerateTokens() == false) 
+	{
+		ERROR("%s", "Lexical analysis failed is input empty?");
+		return false;
+	}
+
+	*pTokensOut = m_Tokens;
+	return true;
+}
+
+bool Lexer::AnalyzeLine(string Input, vector<Token>* pTokensOut)
+{
+	/* Clear buffers from last analysis for new analysis */
+
+	m_Input.clear();
+	m_Tokens.clear();
+
+	if (!pTokensOut)
+	{
+		ERROR("%s", "pTokensOut was nullptr");
+		return false;
+	}
+
+	m_Input.push_back(Input);
+	
+	PreProcessing();
+
+	if (GenerateTokens() == false) 
+	{
+		ERROR("%s", "Lexical analysis failed is line empty?");
+		return false;
+	}
+
+	*pTokensOut = m_Tokens;
+	return true;
+}
+
+bool Lexer::AnalyzeFile(string Path, vector<Token>* pTokensOut)
+{
+	/* Clear buffers from last analysis for new analysis */
+
+	m_Input.clear();
+	m_Tokens.clear();
+
 	if (LoadFile(Path) == false) 
 	{
 		ERROR("%s", "Lexical analysis failed, could not load file");
@@ -18,8 +77,12 @@ bool Lexer::Analyze(string Path)
 		return false;
 	}
 
-	GenerateFile("testlex.lex");
-	return false;
+	GenerateFile("ANALYSIS.lex");
+
+	if (pTokensOut) 
+		*pTokensOut = m_Tokens;
+
+	return true;
 }
 
 bool Lexer::LoadFile(string Path)
@@ -73,6 +136,8 @@ bool Lexer::GenerateTokens()
 	{
 		vector<string> Tokens = Helper::String::TokenizeEx(Line, DEFAULT_DELIMITERS + TOKEN_DELIMITERS);
 
+		/* Filters out unwanted tokens */
+
 		for (unsigned int Index = 0; Index < Tokens.size(); Index++) 
 		{
 			if (Tokens[Index] == "" || Tokens[Index] == " " || Tokens[Index] == "\t" || Tokens[Index] == "\v" || Tokens[Index] == "\n" || Tokens[Index] == "\r" || Tokens[Index] == "\f") 
@@ -89,30 +154,32 @@ bool Lexer::GenerateTokens()
 			string Type;
 
 			if (Value == "=")
-				Type = "operator=";
+				Type = "OPERATOR=";
 			else if (Value == "&")
-				Type = "operator&";
+				Type = "OPERATOR&";
 			else if (Value == "^")
-				Type = "operator^";
+				Type = "OPERATOR^";
 			else if (Value == "!")
-				Type = "operator!";
+				Type = "OPERATOR!";
 			else if (Value == "(")
-				Type = "par-left";
+				Type = "LPAREN";
 			else if (Value == ")")
-				Type = "par-right";
+				Type = "RPAREN";
 			else if (Value == "[")
-				Type = "bra-left";
+				Type = "LBRACKET";
 			else if (Value == "]")
-				Type = "bra-right";
+				Type = "RBRACKET";
 			else if (Value == "{")
-				Type = "cbr-left";
+				Type = "LCURLY";
 			else if (Value == "}")
-				Type = "cbr-right";
+				Type = "RCURLY";
 			else if (Value == ";")
-				Type = "semicolon";
+				Type = "COLON";
+			else if (Helper::String::IsNumber(Value))
+				Type = "NUMBER";
 			else
-				Type = "identifier";
-
+				Type = "IDENTIFIER";
+			
 			GeneratedToken.SetType(Type);
 			m_Tokens.push_back(GeneratedToken);
 		}

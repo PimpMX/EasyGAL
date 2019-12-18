@@ -2,6 +2,10 @@
 
 #include <string>
 #include <fstream>
+#include <unordered_map>
+
+#include "Debug.h"
+#include "Helper.h"
 
 using namespace std;
 
@@ -17,9 +21,9 @@ public:
 	~Token();
 
 	string GetType();
-	void SetType(string Type);
-
 	string GetValue();
+	
+	void SetType(string Type);
 	void SetValue(string Value);
 
 	friend ostream& operator<<(ostream& Out, const Token& OutToken);
