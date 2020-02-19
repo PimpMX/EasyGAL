@@ -55,7 +55,7 @@ vector<string> Helper::String::TokenizeEx(const string& InputString, string Deli
 
 	vector<string> Tokens;
 
-	int iBegin = String::FindNot(InputString, Delimiters);
+	int iBegin = 0;
 
 	for (unsigned int i = iBegin; i < InputString.size() + 1; i++)
 	{
@@ -172,4 +172,95 @@ string Helper::File::ExtractFileName(string Path)
 	}
 
 	return string(Path.begin() + iBegin, Path.begin() + iEnd);
+}
+
+/*
+*		Helper::Algorithms::ShuntingYard transforms a given expression from infix notation
+*		to postfix notation. The function only transforms the expression and doesn't evaluate it.
+*/
+
+vector<Token> Helper::Algorithms::ShuntingYard(vector<Token> Expression)
+{
+	deque<Token> Right, Left, Bottom;
+
+	//	Filter out unwanted tokens.
+
+	for (int Index = 0; Index < Expression.size(); Index++) 
+	{
+		TokenType Type = Expression[Index].GetType();
+
+		if (Type == TokenType::NUMBER) 
+		{
+			ERROR("%s", "Binary expression error: integers are not allowed!");
+			return vector<Token>{};
+		}
+
+		switch (Type) 
+		{
+		case TokenType::OPERATOR_EQUAL:
+		case TokenType::BRACKET_LEFT:
+		case TokenType::BRACKET_RIGHT:
+		case TokenType::CURLY_LEFT:
+		case TokenType::CURLY_RIGHT:
+		case TokenType::SEMICOLON:
+			Expression.erase(Expression.begin() + Index);
+		}
+	}
+
+	//	Copy filtered vector into our stack.
+
+	Right = deque<Token>(Expression.begin(), Expression.end());		
+
+	//	Split up operators and identifiers.
+
+	while (Right.size()) 
+	{
+		if (Right.back().GetType() == TokenType::IDENTIFIER)
+		{
+			Left.push_back(Right.back());
+			Right.pop_back();
+		}
+		else
+		{
+			Bottom.push_back(Right.back());
+			Right.pop_back();
+		}
+	}
+
+	//	Remove parentheses and move operators to left stack.
+
+	while (Bottom.size()) 
+	{
+		if (Bottom.back().GetType() == TokenType::PAREN_LEFT || Bottom.back().GetType() == TokenType::PAREN_RIGHT) 
+		{
+			Right.push_back(Bottom.back());
+			Bottom.pop_back();
+		}
+		else 
+		{
+			Left.push_back(Bottom.back());
+			Bottom.pop_back();
+		}
+
+		int Size = Right.size() - 1;
+
+		for (int Index = 0; Index < Size; Index++) 
+		{
+			if (Right[Index].GetType() == TokenType::PAREN_LEFT && Right[Index + 1].GetType() == TokenType::PAREN_RIGHT) 
+			{
+				Right.erase(Right.begin() + Index);
+				Right.erase(Right.begin() + Index);
+			}
+		}
+	}
+
+	//	If the expression has unclosed parentheses, we will notice it here.
+
+	if (Right.size())
+	{
+		ERROR("%s", "Binary expression error: parentheses couldn't be resolved");
+		return vector<Token>{};
+	}
+
+	return vector<Token>{Left.begin(), Left.end()};
 }

@@ -3,6 +3,9 @@
 #include <cstring>
 #include <string>
 #include <vector>
+#include <deque>
+
+#include "Token.h"
 
 using namespace std;
 
@@ -23,5 +26,10 @@ namespace Helper
 	namespace File 
 	{
 		string ExtractFileName(string Path);
+	}
+
+	namespace Algorithms 
+	{
+		vector<Token> ShuntingYard(vector<Token> Expression);
 	}
 }
