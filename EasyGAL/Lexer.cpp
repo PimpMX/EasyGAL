@@ -1,6 +1,6 @@
 #include "Lexer.h"
 
-Lexer g_Lexer;
+Lexer LEXER;
 
 bool Lexer::Analyze(vector<string> Input, vector<Token>* pTokensOut)
 {

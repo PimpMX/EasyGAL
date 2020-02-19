@@ -2,7 +2,7 @@
 
 Expression::Expression(string Expression)
 {
-	if (g_Lexer.AnalyzeLine(Expression, &m_Expression) == false)
+	if (LEXER.AnalyzeLine(Expression, &m_Expression) == false)
 	{
 		ERROR("%s", "Lexical analysis for expression failed");
 	}

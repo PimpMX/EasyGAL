@@ -36,9 +36,10 @@ private:
 	ofstream m_OutputFile;
 };
 
-extern Lexer g_Lexer;
+extern Lexer LEXER;
 
 const string TOKEN_DELIMITERS = "=&|^!()[]{};";
 const string DEFAULT_DELIMITERS = " \t\v\n\r\f";
+
 
 
