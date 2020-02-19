@@ -6,17 +6,6 @@ Expression::Expression(string Expression)
 	{
 		ERROR("%s", "Lexical analysis for expression failed");
 	}
-
-	for (Token T : m_Expression) 
-	{
-		if (T.GetType() == "IDENTIFIER") 
-		{
-			if (Symbol::Get(T.GetValue())) 
-			{
-				printf("%i", Symbol::Get(T.GetValue()).value().GetValue());
-			}
-		}
-	}
 }
 
 Expression::Expression(vector<Token> Expression)
@@ -28,6 +17,11 @@ Expression::~Expression()
 }
 
 bool Expression::Evaluate()
+{
+	return false;
+}
+
+bool Expression::BuildTree()
 {
 	return false;
 }

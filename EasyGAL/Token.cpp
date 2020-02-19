@@ -1,6 +1,17 @@
 #include "Token.h"
 
-Token::Token(string Type, string Value)
+Token::Token()
+{
+	m_KeyValuePair.first = TokenType::NONE;
+	m_KeyValuePair.second = "";
+}
+
+Token::~Token()
+{
+
+}
+
+Token::Token(TokenType Type, string Value)
 {
 	m_KeyValuePair.first = Type;
 	m_KeyValuePair.second = Value;
@@ -8,21 +19,11 @@ Token::Token(string Type, string Value)
 
 Token::Token(string Value)
 {
-	// Type is set to Value of Token, temporarily.
-
-	m_KeyValuePair.first = Value;
+	m_KeyValuePair.first = TokenType::NONE;
 	m_KeyValuePair.second = Value;
 }
 
-Token::Token()
-{
-}
-
-Token::~Token()
-{
-}
-
-string Token::GetType()
+TokenType Token::GetType()
 {
 	return m_KeyValuePair.first;
 }
@@ -32,7 +33,7 @@ string Token::GetValue()
 	return m_KeyValuePair.second;
 }
 
-void Token::SetType(string Type)
+void Token::SetType(TokenType Type)
 {
 	m_KeyValuePair.first = Type;
 }
@@ -44,7 +45,7 @@ void Token::SetValue(string Value)
 
 ostream& operator<<(ostream& Out, const Token& OutToken)
 {
-	Out << "[" << OutToken.m_KeyValuePair.first << R"(: ")" << OutToken.m_KeyValuePair.second << R"("])";
+	Out << "[" << (int)(OutToken.m_KeyValuePair.first) << R"(: ")" << OutToken.m_KeyValuePair.second << R"("])";
 	return Out;
 }
 

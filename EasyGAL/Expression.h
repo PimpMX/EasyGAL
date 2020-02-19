@@ -18,6 +18,7 @@ public:
 
 private:
 
+	bool BuildTree();
 
 private:
 

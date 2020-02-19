@@ -114,9 +114,7 @@ int Helper::String::Find(const string& String, const string& Characters, unsigne
 	return -1;
 }
 
-/*
-*		String::FindNot returns the index of the first character that is not any of the specified characters.
-*/
+//		String::FindNot returns the index of the first character that is not any of the specified characters.
 
 int Helper::String::FindNot(const string& String, const string& Characters, unsigned int StartIndex)
 {
@@ -137,6 +135,8 @@ int Helper::String::FindNot(const string& String, const string& Characters, unsi
 	return -1;
 }
 
+//		Helper::String::IsNumber checks if a string is a number
+
 bool Helper::String::IsNumber(const string& String)
 {
 	if (String.empty())
@@ -147,4 +147,29 @@ bool Helper::String::IsNumber(const string& String)
 			return false;
 	
 	return true;
+}
+
+/*
+*		Helper::File::ExtractFileName extracts the name of a file from the filepath.
+*		It also leaves out the file extension if it has one.
+*/
+
+string Helper::File::ExtractFileName(string Path)
+{
+	int iBegin = 0, iEnd = Path.size() - 1;
+
+	for (int Index = Path.size() - 1; Index > 0; Index--) 
+	{
+		if (Path.at(Index) == '.')
+		{
+			iEnd = Index;
+		}
+		else if (Path.at(Index) == '\\') 
+		{
+			iBegin = Index;
+			break;
+		}
+	}
+
+	return string(Path.begin() + iBegin, Path.begin() + iEnd);
 }

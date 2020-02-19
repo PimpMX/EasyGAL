@@ -19,4 +19,9 @@ namespace Helper
 
 		bool IsNumber(const string& String);
 	}
+
+	namespace File 
+	{
+		string ExtractFileName(string Path);
+	}
 }

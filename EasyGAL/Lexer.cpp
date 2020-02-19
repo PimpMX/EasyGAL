@@ -77,7 +77,7 @@ bool Lexer::AnalyzeFile(string Path, vector<Token>* pTokensOut)
 		return false;
 	}
 
-	GenerateFile("ANALYSIS.lex");
+	GenerateFile(Helper::File::ExtractFileName(Path) + string(".lex"));
 
 	if (pTokensOut) 
 		*pTokensOut = m_Tokens;
@@ -151,35 +151,37 @@ bool Lexer::GenerateTokens()
 		{
 			Token GeneratedToken(Value);
 
-			string Type;
+			TokenType Type;
 
 			if (Value == "=")
-				Type = "OPERATOR=";
+				Type = TokenType::OPERATOR_EQUAL;
 			else if (Value == "&")
-				Type = "OPERATOR&";
+				Type = TokenType::OPERATOR_AND;
+			else if (Value == "|")
+				Type = TokenType::OPERATOR_OR;
 			else if (Value == "^")
-				Type = "OPERATOR^";
+				Type = TokenType::OPERATOR_XOR;
 			else if (Value == "!")
-				Type = "OPERATOR!";
+				Type = TokenType::OPERATOR_NOT;
 			else if (Value == "(")
-				Type = "LPAREN";
+				Type = TokenType::PAREN_LEFT;
 			else if (Value == ")")
-				Type = "RPAREN";
+				Type = TokenType::PAREN_RIGHT;
 			else if (Value == "[")
-				Type = "LBRACKET";
+				Type = TokenType::BRACKET_LEFT;
 			else if (Value == "]")
-				Type = "RBRACKET";
+				Type = TokenType::BRACKET_RIGHT;
 			else if (Value == "{")
-				Type = "LCURLY";
+				Type = TokenType::CURLY_LEFT;
 			else if (Value == "}")
-				Type = "RCURLY";
+				Type = TokenType::CURLY_RIGHT;
 			else if (Value == ";")
-				Type = "COLON";
+				Type = TokenType::SEMICOLON;
 			else if (Helper::String::IsNumber(Value))
-				Type = "NUMBER";
+				Type = TokenType::NUMBER;
 			else
-				Type = "IDENTIFIER";
-			
+				Type = TokenType::IDENTIFIER;
+
 			GeneratedToken.SetType(Type);
 			m_Tokens.push_back(GeneratedToken);
 		}

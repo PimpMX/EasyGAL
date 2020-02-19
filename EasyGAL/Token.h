@@ -2,28 +2,44 @@
 
 #include <string>
 #include <fstream>
-#include <unordered_map>
-
 #include "Debug.h"
-#include "Helper.h"
 
 using namespace std;
+
+enum class TokenType
+{
+	NONE,
+	NUMBER,
+	IDENTIFIER,
+	OPERATOR_EQUAL,
+	OPERATOR_AND,
+	OPERATOR_OR,
+	OPERATOR_XOR,
+	OPERATOR_NOT,
+	PAREN_LEFT,
+	PAREN_RIGHT,
+	BRACKET_LEFT,
+	BRACKET_RIGHT,
+	CURLY_LEFT,
+	CURLY_RIGHT,
+	SEMICOLON
+};
 
 class Token
 {
 
 public:
 
-	Token(string Type, string Value);
-	Token(string Value);
-
 	Token();
 	~Token();
+	
+	Token(TokenType Type, string Value);
+	Token(string Value);
 
-	string GetType();
+	TokenType GetType();
 	string GetValue();
 	
-	void SetType(string Type);
+	void SetType(TokenType Type);
 	void SetValue(string Value);
 
 	friend ostream& operator<<(ostream& Out, const Token& OutToken);
@@ -31,5 +47,5 @@ public:
 
 private:
 
-	pair<string, string> m_KeyValuePair;
+	pair<TokenType, string> m_KeyValuePair;
 };
